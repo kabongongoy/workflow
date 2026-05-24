@@ -39,7 +39,7 @@ jobs:
           TF_VAR_bucket_name: ${{ secrets.BUCKET_NAME }}         
         run: terraform apply -auto-approve
         working-directory: terraform
-      - name: upload file to s3 bucket
-        run: aws s3 cp index.html s3://${{ secrets.BUCKET_NAME }}/index.html      
+      # - name: upload file to s3 bucket
+      #   run: aws s3 cp index.html s3://${{ secrets.BUCKET_NAME }}/index.html      
 
 
