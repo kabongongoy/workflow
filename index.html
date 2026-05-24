@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>YourAgency — We Build What Matters</title>
+  <style>
+    /* ── Reset & Base ── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:        #0f0f0f;
+      --bg-card:   #1a1a1a;
+      --bg-hover:  #222222;
+      --accent:    #6c63ff;
+      --accent2:   #ff6584;
+      --text:      #f0f0f0;
+      --muted:     #888;
+      --border:    #2a2a2a;
+      --radius:    12px;
+      --font:      'Segoe UI', system-ui, sans-serif;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--font);
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    /* ── Nav ── */
+    nav {
+      position: sticky; top: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 1rem 6%;
+      background: rgba(15,15,15,.85);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav-logo {
+      font-size: 1.4rem; font-weight: 700;
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    }
+
+    .nav-links { display: flex; gap: 2rem; list-style: none; }
+    .nav-links a { color: var(--muted); font-size: .95rem; transition: color .2s; }
+    .nav-links a:hover { color: var(--text); text-decoration: none; }
+
+    .nav-cta {
+      padding: .5rem 1.25rem; border-radius: 50px;
+      background: var(--accent); color: #fff !important;
+      font-weight: 600; transition: opacity .2s;
+    }
+    .nav-cta:hover { opacity: .85; text-decoration: none !important; }
+
+    /* ── Hero ── */
+    .hero {
+      min-height: 90vh;
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      text-align: center; padding: 4rem 6%;
+      background: radial-gradient(ellipse 80% 60% at 50% 0%, #1e1450 0%, var(--bg) 70%);
+    }
+
+    .hero-tag {
+      display: inline-block; margin-bottom: 1.2rem;
+      padding: .35rem 1rem; border-radius: 50px;
+      border: 1px solid var(--accent); color: var(--accent);
+      font-size: .8rem; letter-spacing: .1em; text-transform: uppercase;
+    }
+
+    .hero h1 {
+      font-size: clamp(2.4rem, 6vw, 5rem);
+      font-weight: 800; line-height: 1.1;
+      max-width: 780px; margin: 0 auto .8rem;
+    }
+
+    .hero h1 span {
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    }
+
+    .hero p {
+      font-size: 1.15rem; color: var(--muted);
+      max-width: 520px; margin: 0 auto 2.4rem;
+    }
+
+    .hero-btns { display: flex; gap: 1rem; flex-wrap: wrap; justify-content: center; }
+
+    .btn {
+      padding: .8rem 2rem; border-radius: 50px;
+      font-size: 1rem; font-weight: 600; cursor: pointer; border: none;
+      transition: transform .15s, opacity .2s;
+    }
+    .btn:hover { transform: translateY(-2px); }
+
+    .btn-primary { background: var(--accent); color: #fff; }
+    .btn-primary:hover { opacity: .9; }
+
+    .btn-ghost {
+      background: transparent;
+      border: 1.5px solid var(--border);
+      color: var(--text);
+    }
+    .btn-ghost:hover { border-color: var(--accent); color: var(--accent); }
+
+    .hero-stats {
+      display: flex; gap: 3rem; margin-top: 4rem; flex-wrap: wrap; justify-content: center;
+    }
+    .stat { text-align: center; }
+    .stat strong { display: block; font-size: 2rem; font-weight: 800; color: var(--accent); }
+    .stat span { font-size: .85rem; color: var(--muted); }
+
+    /* ── Section shared ── */
+    section { padding: 5rem 6%; }
+    .section-label {
+      display: inline-block; margin-bottom: .6rem;
+      font-size: .75rem; text-transform: uppercase; letter-spacing: .12em;
+      color: var(--accent);
+    }
+    .section-title {
+      font-size: clamp(1.8rem, 4vw, 2.8rem);
+      font-weight: 800; margin-bottom: 1rem;
+    }
+    .section-sub { color: var(--muted); max-width: 500px; margin-bottom: 3rem; }
+
+    /* ── Services ── */
+    #services { background: var(--bg); }
+
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 2rem;
+      transition: border-color .25s, transform .2s;
+    }
+    .card:hover { border-color: var(--accent); transform: translateY(-4px); }
+
+    .card-icon {
+      font-size: 2rem; margin-bottom: 1rem;
+      display: flex; align-items: center; justify-content: center;
+      width: 56px; height: 56px; border-radius: 14px;
+      background: linear-gradient(135deg, #1e1450, #2d1a5e);
+    }
+
+    .card h3 { font-size: 1.1rem; margin-bottom: .5rem; }
+    .card p  { color: var(--muted); font-size: .9rem; }
+
+    /* ── About / Split ── */
+    #about {
+      background: var(--bg-card);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .split {
+      display: flex; gap: 4rem; align-items: center; flex-wrap: wrap;
+    }
+    .split-text { flex: 1 1 320px; }
+    .split-visual {
+      flex: 1 1 320px;
+      background: linear-gradient(135deg, #1a1450 0%, #1a0a2e 100%);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      min-height: 340px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 5rem;
+    }
+
+    .checklist { list-style: none; margin-top: 1.5rem; }
+    .checklist li {
+      padding: .4rem 0; color: var(--muted);
+      display: flex; align-items: center; gap: .6rem;
+    }
+    .checklist li::before {
+      content: '✓';
+      color: var(--accent); font-weight: 700;
+    }
+
+    /* ── Work / Portfolio ── */
+    #work { background: var(--bg); }
+
+    .portfolio-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .portfolio-card {
+      border-radius: var(--radius); overflow: hidden;
+      border: 1px solid var(--border);
+      background: var(--bg-card);
+      transition: transform .2s, border-color .25s;
+    }
+    .portfolio-card:hover { transform: translateY(-4px); border-color: var(--accent); }
+
+    .portfolio-thumb {
+      height: 180px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 3.5rem;
+    }
+    .portfolio-thumb.c1 { background: linear-gradient(135deg,#0d1b2a,#1b3a5c); }
+    .portfolio-thumb.c2 { background: linear-gradient(135deg,#1a0a2e,#3b1a6e); }
+    .portfolio-thumb.c3 { background: linear-gradient(135deg,#0a1a0a,#1a4a2e); }
+
+    .portfolio-info { padding: 1.2rem; }
+    .portfolio-info h3 { margin-bottom: .3rem; }
+    .portfolio-info p { font-size: .85rem; color: var(--muted); }
+    .tag {
+      display: inline-block; margin-top: .5rem; margin-right: .3rem;
+      padding: .2rem .65rem; border-radius: 50px;
+      background: #1e1450; color: var(--accent);
+      font-size: .75rem;
+    }
+
+    /* ── Testimonials ── */
+    #testimonials { background: var(--bg-card); border-top: 1px solid var(--border); }
+
+    .testi-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .testi-card {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.8rem;
+    }
+
+    .stars { color: #fbbf24; margin-bottom: 1rem; letter-spacing: .1em; }
+    .testi-card blockquote { color: var(--muted); font-size: .95rem; font-style: italic; }
+    .testi-author { display: flex; align-items: center; gap: .8rem; margin-top: 1.2rem; }
+    .avatar {
+      width: 42px; height: 42px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.1rem; font-weight: 700; color: #fff;
+    }
+    .av1 { background: linear-gradient(135deg,#6c63ff,#a78bfa); }
+    .av2 { background: linear-gradient(135deg,#f97316,#fb923c); }
+    .av3 { background: linear-gradient(135deg,#10b981,#34d399); }
+    .testi-author div strong { font-size: .9rem; display: block; }
+    .testi-author div span  { font-size: .78rem; color: var(--muted); }
+
+    /* ── Contact ── */
+    #contact { background: var(--bg); }
+
+    .contact-wrap {
+      display: flex; gap: 4rem; flex-wrap: wrap; align-items: flex-start;
+    }
+    .contact-info { flex: 1 1 260px; }
+    .contact-info p { color: var(--muted); margin-bottom: 1.5rem; }
+    .contact-detail {
+      display: flex; align-items: center; gap: .7rem;
+      color: var(--muted); margin-bottom: .8rem; font-size: .95rem;
+    }
+    .contact-detail .icon { font-size: 1.1rem; }
+
+    form { flex: 1 1 340px; display: flex; flex-direction: column; gap: 1rem; }
+
+    input, textarea, select {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      color: var(--text);
+      padding: .85rem 1rem;
+      font-size: .95rem;
+      font-family: var(--font);
+      outline: none;
+      transition: border-color .2s;
+    }
+    input:focus, textarea:focus, select:focus { border-color: var(--accent); }
+    textarea { resize: vertical; min-height: 130px; }
+    ::placeholder { color: var(--muted); }
+
+    form .btn-primary { align-self: flex-start; }
+
+    /* ── Footer ── */
+    footer {
+      background: var(--bg-card);
+      border-top: 1px solid var(--border);
+      padding: 2.5rem 6%;
+      display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem;
+    }
+    footer p { color: var(--muted); font-size: .85rem; }
+
+    .footer-links { display: flex; gap: 1.5rem; }
+    .footer-links a { color: var(--muted); font-size: .85rem; transition: color .2s; }
+    .footer-links a:hover { color: var(--text); text-decoration: none; }
+
+    /* ── Responsive ── */
+    @media (max-width: 640px) {
+      .nav-links { display: none; }
+      .hero-stats { gap: 1.5rem; }
+      .split { gap: 2rem; }
+      .contact-wrap { gap: 2rem; }
+      footer { flex-direction: column; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <span class="nav-logo">YourAgency</span>
+    <ul class="nav-links">
+      <li><a href="#services">Services</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#work">Work</a></li>
+      <li><a href="#contact" class="nav-cta">Get in Touch</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <span class="hero-tag">&#9670; Digital Agency</span>
+    <h1>We Build <span>Digital Experiences</span> That Drive Results</h1>
+    <p>Strategy, design, and development — we help businesses grow online with purpose-built solutions.</p>
+    <div class="hero-btns">
+      <button class="btn btn-primary" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">Start a Project</button>
+      <button class="btn btn-ghost" onclick="document.getElementById('work').scrollIntoView({behavior:'smooth'})">View Our Work</button>
+    </div>
+    <div class="hero-stats">
+      <div class="stat"><strong>120+</strong><span>Projects Delivered</span></div>
+      <div class="stat"><strong>98%</strong><span>Client Satisfaction</span></div>
+      <div class="stat"><strong>8 yrs</strong><span>In Business</span></div>
+    </div>
+  </section>
+
+  <!-- SERVICES -->
+  <section id="services">
+    <div class="section-label">What We Do</div>
+    <h2 class="section-title">Our Services</h2>
+    <p class="section-sub">From concept to launch, we cover every layer of your digital presence.</p>
+    <div class="grid-3">
+      <div class="card">
+        <div class="card-icon">🎨</div>
+        <h3>UI / UX Design</h3>
+        <p>Intuitive interfaces that delight users and drive conversions, backed by research and tested prototypes.</p>
+      </div>
+      <div class="card">
+        <div class="card-icon">💻</div>
+        <h3>Web Development</h3>
+        <p>Fast, scalable, and accessible websites and web apps built with modern technologies.</p>
+      </div>
+      <div class="card">
+        <div class="card-icon">📱</div>
+        <h3>Mobile Apps</h3>
+        <p>Native and cross-platform mobile experiences that users love on iOS and Android.</p>
+      </div>
+      <div class="card">
+        <div class="card-icon">⚙️</div>
+        <h3>Automation</h3>
+        <p>Workflow automation and integrations that save time and eliminate manual processes.</p>
+      </div>
+      <div class="card">
+        <div class="card-icon">📈</div>
+        <h3>Growth & SEO</h3>
+        <p>Data-driven strategies that increase visibility, traffic, and qualified leads.</p>
+      </div>
+      <div class="card">
+        <div class="card-icon">☁️</div>
+        <h3>Cloud & DevOps</h3>
+        <p>Reliable infrastructure, CI/CD pipelines, and monitoring so your product runs 24/7.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section id="about">
+    <div class="split">
+      <div class="split-text">
+        <div class="section-label">About Us</div>
+        <h2 class="section-title">A Team That Cares About Your Success</h2>
+        <p style="color:var(--muted);margin-bottom:1rem;">We're a lean, senior-level team of designers, engineers, and strategists who treat every project as if it were our own business.</p>
+        <ul class="checklist">
+          <li>Transparent process from kickoff to launch</li>
+          <li>No bloated retainers — clear scope, fixed milestones</li>
+          <li>Dedicated Slack channel for every client</li>
+          <li>12-month post-launch support included</li>
+        </ul>
+      </div>
+      <div class="split-visual">🚀</div>
+    </div>
+  </section>
+
+  <!-- WORK -->
+  <section id="work">
+    <div class="section-label">Portfolio</div>
+    <h2 class="section-title">Recent Work</h2>
+    <p class="section-sub">A snapshot of projects we're proud of.</p>
+    <div class="portfolio-grid">
+      <div class="portfolio-card">
+        <div class="portfolio-thumb c1">🛒</div>
+        <div class="portfolio-info">
+          <h3>ShopNova E-Commerce</h3>
+          <p>Full-stack store redesign that lifted conversion rate by 34%.</p>
+          <span class="tag">Next.js</span><span class="tag">Shopify</span><span class="tag">UX</span>
+        </div>
+      </div>
+      <div class="portfolio-card">
+        <div class="portfolio-thumb c2">📊</div>
+        <div class="portfolio-info">
+          <h3>FinTrack SaaS Dashboard</h3>
+          <p>Real-time analytics platform for a fintech startup — 0 to 10 k users in 6 months.</p>
+          <span class="tag">React</span><span class="tag">Node</span><span class="tag">AWS</span>
+        </div>
+      </div>
+      <div class="portfolio-card">
+        <div class="portfolio-thumb c3">🌱</div>
+        <div class="portfolio-info">
+          <h3>GreenRoute Logistics</h3>
+          <p>Mobile app and API for sustainable last-mile delivery routing.</p>
+          <span class="tag">Flutter</span><span class="tag">FastAPI</span><span class="tag">Maps</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TESTIMONIALS -->
+  <section id="testimonials">
+    <div class="section-label">Testimonials</div>
+    <h2 class="section-title">What Clients Say</h2>
+    <div class="testi-grid">
+      <div class="testi-card">
+        <div class="stars">★★★★★</div>
+        <blockquote>"They delivered ahead of schedule and the quality blew us away. Our bounce rate dropped 40% after launch."</blockquote>
+        <div class="testi-author">
+          <div class="avatar av1">AM</div>
+          <div><strong>Amara M.</strong><span>CEO, ShopNova</span></div>
+        </div>
+      </div>
+      <div class="testi-card">
+        <div class="stars">★★★★★</div>
+        <blockquote>"The automation workflows they built saved us 20 hours per week. Worth every penny — and more."</blockquote>
+        <div class="testi-author">
+          <div class="avatar av2">JK</div>
+          <div><strong>James K.</strong><span>CTO, FinTrack</span></div>
+        </div>
+      </div>
+      <div class="testi-card">
+        <div class="stars">★★★★★</div>
+        <blockquote>"Responsive, professional, and genuinely talented. They're our go-to agency for everything digital."</blockquote>
+        <div class="testi-author">
+          <div class="avatar av3">SL</div>
+          <div><strong>Sofia L.</strong><span>Founder, GreenRoute</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact">
+    <div class="section-label">Get In Touch</div>
+    <h2 class="section-title">Start a Project</h2>
+    <div class="contact-wrap">
+      <div class="contact-info">
+        <p>Tell us about your project and we'll get back to you within one business day.</p>
+        <div class="contact-detail"><span class="icon">📧</span> hello@youragency.com</div>
+        <div class="contact-detail"><span class="icon">📞</span> +1 (555) 000-1234</div>
+        <div class="contact-detail"><span class="icon">📍</span> New York, NY — Remote Worldwide</div>
+      </div>
+      <form onsubmit="handleSubmit(event)">
+        <input type="text"  name="name"    placeholder="Your Name"          required />
+        <input type="email" name="email"   placeholder="Email Address"      required />
+        <input type="text"  name="subject" placeholder="Project Type"                />
+        <textarea            name="message" placeholder="Tell us about your project…" required></textarea>
+        <button type="submit" class="btn btn-primary">Send Message →</button>
+      </form>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <p>© 2026 YourAgency. All rights reserved.</p>
+    <div class="footer-links">
+      <a href="#">Privacy</a>
+      <a href="#">Terms</a>
+      <a href="#">Twitter</a>
+      <a href="#">LinkedIn</a>
+    </div>
+  </footer>
+
+  <script>
+    function handleSubmit(e) {
+      e.preventDefault();
+      const btn = e.target.querySelector('button[type=submit]');
+      btn.textContent = '✓ Message Sent!';
+      btn.style.background = '#10b981';
+      btn.disabled = true;
+      setTimeout(() => {
+        btn.textContent = 'Send Message →';
+        btn.style.background = '';
+        btn.disabled = false;
+        e.target.reset();
+      }, 3000);
+    }
+  </script>
+
+</body>
+</html>
