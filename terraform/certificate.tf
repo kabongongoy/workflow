@@ -1,7 +1,7 @@
 resource "aws_acm_certificate" "workflow-cert" {
   domain_name       = "wazobia.com.au"
   validation_method = "DNS"
-  subject_alternative_names = ["*.wazobia.com.au"]
+  subject_alternative_names = ["www.wazobia.com.au"]
   lifecycle {
     create_before_destroy = true
   }
