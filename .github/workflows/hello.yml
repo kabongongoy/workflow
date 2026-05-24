@@ -5,6 +5,9 @@ on:
     branches:
       - main
   workflow_dispatch:
+permissions:
+  id-token: write   # Required to request the OIDC JWT
+  contents: read    # Required to checkout the repository
 
 jobs:
   Listing_buckets:
